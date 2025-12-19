@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Projetos - Instituto Arte de Saltar</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1f2937;
+            --secondary-orange: #049344;
+            --accent-yellow: #fbbf24;
+            --dark-gray: #1f2937;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+            --success-green: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 1rem 0;
+            margin-top: 0;
+        }
+
+        .dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: transparent;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .dropdown-content a:hover {
+            background: var(--light-gray);
+        }
+
+        .cta-button {
+            background: var(--secondary-orange);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(4, 147, 68, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        /* PAGE HEADER */
+        .page-header {
+            height: 50vh;
+            background: url('assets/nossos-projetos.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px);
+            z-index: -2;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* PROJETOS SECTION */
+        .projetos-section {
+            padding: 100px 2rem;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-orange);
+            border-radius: 2px;
+        }
+
+        .projetos-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projeto-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .projeto-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .projeto-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .projeto-card:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .projeto-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            height: 400px;
+        }
+
+        .projeto-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .projeto-image img[src*="centro-treinamento"] {
+            object-fit: contain;
+        }
+
+        .projeto-image img[src*="logo.png"] {
+            object-fit: contain;
+            width: 60%;
+            height: 60%;
+            margin-left: 20%;
+            margin-top: 10%;
+        }
+
+        .projeto-card:hover .projeto-image img {
+            transform: scale(1.05);
+        }
+
+        .projeto-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary-orange);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(4, 147, 68, 0.4);
+        }
+
+        .projeto-content h3 {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .projeto-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        .projeto-features {
+            list-style: none;
+            padding: 0;
+            margin-top: 1.5rem;
+        }
+
+        .projeto-features li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #374151;
+            font-size: 1.05rem;
+        }
+
+        .projeto-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        /* IMPACTO SOCIAL */
+        .impacto-section {
+            padding: 100px 2rem;
+            background: var(--light-gray);
+        }
+
+        .impacto-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto auto;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .impacto-grid-bottom {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .impacto-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary-orange);
+        }
+
+        .impacto-card.large {
+            padding: 3rem;
+        }
+
+        .impacto-card.large .impacto-icon {
+            font-size: 3.5rem;
+        }
+
+        .impacto-card.large h4 {
+            font-size: 1.5rem;
+        }
+
+        .impacto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
+        .impacto-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .impacto-card h4 {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .impacto-card p {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        /* EQUIPE SECTION */
+        .equipe-section {
+            padding: 100px 2rem;
+            background: white;
+        }
+
+        .equipe-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .equipe-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .equipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .equipe-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-orange));
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
+            overflow: hidden;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .equipe-card h4 {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .equipe-card p {
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: url('assets/banner-cta.png');
+            background-size: cover;
+            background-position: center bottom;
+            padding: 80px 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/banner-cta.png');
+            background-size: cover;
+            background-position: center top;
+            filter: blur(2px);
+            z-index: -2;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: -1;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--secondary-orange);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--secondary-orange);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark-gray);
+            color: var(--light-gray);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-orange);
+        }
+
+        .footer-middle {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .partners h3, .social h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .partner-logos {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .partner-logo-img, .government-logo-img {
+            height: 100px;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        .government-supporters {
+            margin: 2rem 0 1rem 0;
+            font-weight: normal;
+            color: var(--light-gray);
+            font-size: 1rem;
+        }
+
+        .government-logos {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 3rem 0 1rem;
+        }
+
+        .inspiration {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--accent-yellow);
+            font-weight: 300;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .projeto-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projeto-card:nth-child(even) {
+                direction: ltr;
+            }
+
+            .projeto-image {
+                height: 300px;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .equipe-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+            }
+
+            .impacto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impacto-grid-bottom {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projeto-content h3 {
+                font-size: 1.6rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-links a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .impacto-grid-bottom {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .impacto-grid-bottom {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="assets/logo.png" alt="Instituto Arte de Saltar" style="height: 60px;"></a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#">Institucional ▾</a>
+                    <div class="dropdown-content">
+                        <a href="palavra-presidente.html">Palavra do Presidente</a>
+                        <a href="missao-visao-valores.html">Missão, Visão e Valores</a>
+                        <a href="historia-instituto.html">História do Instituto</a>
+                        <a href="historia-fundador.html">História do Fundador</a>
+                        <a href="nucleos-instituto.html">Núcleos do Instituto</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Quem Somos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="atuacao.html">Áreas de Atuação</a>
+                        <a href="esporte.html">Esporte</a>
+                        <a href="educacao.html">Educação</a>
+                        <a href="cultura.html">Cultura</a>
+                        <a href="tecnologia.html">Tecnologia</a>
+                        <a href="saude-cidadania.html">Saúde e Cidadania</a>
+                        <a href="projetos.html">Projetos</a>
+                        <a href="arte-saltar.html">Arte de Saltar</a>
+                        <a href="centro-ramirez-pala.html">Centro Ramirez Pala</a>
+                        <a href="formacao-capacitacao.html">Formação e Capacitação</a>
+                        <a href="eventos-festivais.html">Eventos e Festivais</a>
+                        <a href="projetos-culturais.html">Projetos culturais e interdisciplinares</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Modalidades ▾</a>
+                    <div class="dropdown-content">
+                        <a href="ginastica-artistica.html">Ginástica Artística</a>
+                        <a href="ginastica-trampolim.html">Ginástica de Trampolim</a>
+                        <a href="outras-modalidades.html">Outras Modalidades Esportivas</a>
+                        <a href="cultura-arte-ct.html">Cultura e Arte no CT</a>
+                        <a href="danca.html">Dança</a>
+                        <a href="musica.html">Música</a>
+                        <a href="teatro.html">Teatro</a>
+                        <a href="oficinas-culturais.html">Oficinas culturais</a>
+                        <a href="shows-eventos.html">Shows e eventos</a>
+                        <a href="acoes-comunitarias.html">Ações comunitárias</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Eventos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="calendario-acoes.html">Calendário de Ações Sociais</a>
+                        <a href="participacoes-competicoes.html">Participações e Competições</a>
+                        <a href="resultados-conquistas.html">Resultados e Conquistas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="transparencia.html">Transparência ▾</a>
+                    <div class="dropdown-content">
+                        <a href="documentos-gestao.html">Documentos e Gestão</a>
+                        <a href="estrutura-organizacional.html">Estrutura Organizacional</a>
+                        <a href="planejamento-gestao.html">Planejamento e Gestão</a>
+                        <a href="editais-compras.html">Editais e Compras</a>
+                        <a href="eleicoes.html">Eleições</a>
+                        <a href="assembleias.html">Assembleias</a>
+                        <a href="cnaes-registrados.html">CNAEs Registrados</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Marketing ▾</a>
+                    <div class="dropdown-content">
+                        <a href="noticias-comunicados.html">Notícias e Comunicados</a>
+                        <a href="patrocinadores.html">Patrocinadores</a>
+                        <a href="engajamento-social.html">Engajamento Social</a>
+                        <a href="galeria.html">Galeria de Fotos e Vídeos</a>
+                        <a href="imprensa.html">Imprensa / Releases</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Relacionamento ▾</a>
+                    <div class="dropdown-content">
+                        <a href="contato.html">Fale Conosco</a>
+                        <a href="ouvidoria.html">Ouvidoria</a>
+                        <a href="quero-participar.html">Quero Participar do Projeto</a>
+                    </div>
+                </li>
+                <li><a href="parceiro.html" class="cta-button">Seja Parceiro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1>Nossos Projetos</h1>
+            <p>Transformando vidas através do esporte, educação e cultura em todo o Brasil</p>
+        </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section class="projetos-section">
+        <h2 class="section-title">Conheça Nossos Projetos</h2>
+        <div class="projetos-container">
+            
+            <!-- PROJETO 1 -->
+            <div class="projeto-card">
+                <div class="projeto-image">
+                    <img src="assets/logo.png" alt="Projeto Social Arte de Saltar">
+                    <div class="projeto-badge">Gratuito</div>
+                </div>
+                <div class="projeto-content">
+                    <h3>Projeto Social Arte de Saltar</h3>
+                    <p>Levamos a ginástica gratuitamente para comunidades em situação de vulnerabilidade social, promovendo inclusão, disciplina e cidadania através do esporte.</p>
+                    <ul class="projeto-features">
+                        <li>Aulas gratuitas em vilas olímpicas</li>
+                        <li>Parceria com escolas públicas</li>
+                        <li>Atividades em igrejas e ONGs</li>
+                        <li>Atendimento a crianças e jovens vulneráveis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PROJETO 2 -->
+            <div class="projeto-card">
+                <div class="projeto-image">
+                    <img src="assets/centro-treinamento.png" alt="Centro de Treinamento">
+                    <div class="projeto-badge">Sustentável</div>
+                </div>
+                <div class="projeto-content">
+                    <h3>Centro de Treinamento Ramirez Pala</h3>
+                    <p>Modelo sustentável que opera em escolas particulares, gerando recursos para expandir nossos projetos sociais e democratizar o acesso à ginástica de qualidade.</p>
+                    <ul class="projeto-features">
+                        <li>Parcerias com escolas particulares</li>
+                        <li>Metodologia de alto nível técnico</li>
+                        <li>Formação de base para atletas</li>
+                        <li>Recursos para projetos sociais</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PROJETO 3 -->
+            <div class="projeto-card">
+                <div class="projeto-image">
+                    <img src="assets/formacao.png" alt="Formação e Capacitação">
+                    <div class="projeto-badge">Certificado</div>
+                </div>
+                <div class="projeto-content">
+                    <h3>Formação e Capacitação</h3>
+                    <p>Cursos oficiais que capacitam professores e estagiários de Educação Física, elevando a qualidade do ensino da ginástica em todo o país.</p>
+                    <ul class="projeto-features">
+                        <li>Cursos oficiais de 20 horas</li>
+                        <li>Certificação reconhecida</li>
+                        <li>Supervisão técnica contínua</li>
+                        <li>Material didático completo</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PROJETO 4 -->
+            <div class="projeto-card">
+                <div class="projeto-image">
+                    <img src="assets/eventos.png" alt="Eventos e Festivais">
+                    <div class="projeto-badge">Comunidade</div>
+                </div>
+                <div class="projeto-content">
+                    <h3>Eventos e Festivais</h3>
+                    <p>Festivais de ginástica e eventos multissetoriais que reúnem comunidades, promovem integração social e celebram conquistas dos nossos alunos.</p>
+                    <ul class="projeto-features">
+                        <li>Festivais de ginástica artística</li>
+                        <li>Eventos multissetoriais</li>
+                        <li>Integração comunitária</li>
+                        <li>Valorização de talentos locais</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PROJETO 5 -->
+            <div class="projeto-card">
+                <div class="projeto-image">
+                    <img src="assets/cultural.png" alt="Projetos Culturais">
+                    <div class="projeto-badge">Educação</div>
+                </div>
+                <div class="projeto-content">
+                    <h3>Projetos Culturais e Educacionais</h3>
+                    <p>Oficinas e atividades que integram esporte, cultura e educação, desenvolvendo habilidades além do aspecto físico em parceria com escolas e instituições.</p>
+                    <ul class="projeto-features">
+                        <li>Oficinas educativas e culturais</li>
+                        <li>Parcerias com escolas e instituições</li>
+                        <li>Desenvolvimento integral dos alunos</li>
+                        <li>Atividades multidisciplinares</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- IMPACTO SOCIAL -->
+    <section class="impacto-section">
+        <h2 class="section-title">Impacto Social</h2>
+        <div class="impacto-grid">
+            <!-- Primeira linha: 2 cards maiores -->
+            <div class="impacto-card large">
+                <div class="impacto-icon">🤝</div>
+                <h4>Inclusão Social</h4>
+                <p>Acolhimento de crianças e jovens em situação de vulnerabilidade, oferecendo oportunidades através do esporte.</p>
+            </div>
+            <div class="impacto-card large">
+                <div class="impacto-icon">🎓</div>
+                <h4>Formação Cidadã</h4>
+                <p>Desenvolvimento de valores como disciplina, respeito e trabalho em equipe através do esporte e da cultura.</p>
+            </div>
+            
+            <!-- Segunda linha: 3 cards menores -->
+            <div class="impacto-grid-bottom">
+                <div class="impacto-card">
+                    <div class="impacto-icon">🏛️</div>
+                    <h4>Ocupação de Espaços</h4>
+                    <p>Transformação de espaços públicos em ambientes de aprendizado, convivência e desenvolvimento comunitário.</p>
+                </div>
+                <div class="impacto-card">
+                    <div class="impacto-icon">💼</div>
+                    <h4>Geração de Empregos</h4>
+                    <p>Capacitação profissional e criação de oportunidades de trabalho na área de educação física e esporte.</p>
+                </div>
+                <div class="impacto-card">
+                    <div class="impacto-icon">🏆</div>
+                    <h4>Revelação de Talentos</h4>
+                    <p>Potencial para descobrir e desenvolver futuros atletas que podem representar o Brasil em competições nacionais e internacionais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EQUIPE -->
+    <section class="equipe-section">
+        <h2 class="section-title">Nossa Equipe</h2>
+        <div class="equipe-grid">
+            <div class="equipe-card">
+                <div class="equipe-avatar">
+                    <img src="assets/ramirez.png" alt="Ramirez Pala" class="avatar-img">
+                </div>
+                <h4>Ramirez Pala</h4>
+                <p>Fundador e ex-atleta da Seleção Brasileira de Ginástica, lidera a visão estratégica do Instituto.</p>
+            </div>
+            <div class="equipe-card">
+                <div class="equipe-avatar">
+                    <img src="assets/professores.png" alt="Professores de Educação Física" class="avatar-img">
+                </div>
+                <h4>Professores de Educação Física</h4>
+                <p>Responsáveis técnicos pelas aulas, garantindo qualidade e segurança em todas as atividades.</p>
+            </div>
+            <div class="equipe-card">
+                <div class="equipe-avatar">
+                    <img src="assets/estagiario.png" alt="Estagiários de Educação Física" class="avatar-img">
+                </div>
+                <h4>Estagiários de Educação Física</h4>
+                <p>Apoio às turmas e vivência prática, preparando novos profissionais qualificados.</p>
+            </div>
+            <div class="equipe-card">
+                <div class="equipe-avatar">
+                    <img src="assets/coordenacao.jpg" alt="Coordenação Técnica" class="avatar-img">
+                </div>
+                <h4>Coordenação Técnica</h4>
+                <p>Supervisão contínua e garantia da qualidade metodológica de todos os programas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 style>Faça Parte Dessa Transformação</h2>
+            <p>Seja um parceiro do Instituto Arte de Saltar e ajude a construir um futuro melhor através do esporte</p>
+            <div class="cta-buttons">
+                <a href="parceiro.html" class="btn-primary">Seja Nosso Parceiro</a>
+                <a href="#contato" class="btn-secondary">Entre em Contato</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="index.html">Início</a> | 
+                <a href="projetos.html">Projetos</a> | 
+                <a href="index.html#transparencia">Transparência</a> | 
+                <a href="contato.html">Contato</a>
+            </div>
+            
+            <div class="footer-middle">
+                <div class="partners">
+                    <h3>Nossos Parceiros</h3>
+                    <div class="partner-logos">
+                        <img src="assets/ct-logo.png" alt="CT Logo" class="partner-logo-img">
+                        <img src="assets/cbc-logo.png" alt="CBC Logo" class="partner-logo-img">
+                    </div>
+                    <p class="government-supporters">APOIADORES GOVERNAMENTAIS</p>
+                    <div class="government-logos">
+                        <img src="assets/lei-incentivo.png" alt="Lei de Incentivo" class="government-logo-img">
+                        <img src="assets/ministerio-esporte.png" alt="Ministério do Esporte" class="government-logo-img">
+                    </div>
+                </div>
+                <div class="social">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/institutoaartedesaltar/" target="_blank" class="social-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?phone=5521999591699&text=Ol%C3%A1%2C+desejo+entrar+em+contato+com+o+Instituto+A+Arte+de+Saltar%21" target="_blank" class="social-icon">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="inspiration">"Alguns assistem à transformação. Outros fazem parte dela."</p>
+                <p class="copyright">© 2025 Instituto Arte de Saltar. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animação dos cards de projeto ao scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.projeto-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Animação dos cards de impacto
+        document.querySelectorAll('.impacto-card, .equipe-card').forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            cardObserver.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Instituto Arte de Saltar</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1f2937;
+            --secondary-orange: #049344;
+            --accent-yellow: #fbbf24;
+            --dark-gray: #1f2937;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+            --success-green: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+            background: white;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            max-width: 300px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 1rem 0;
+            margin-top: 0;
+            animation: fadeIn 0.3s ease;
+            z-index: 1001;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: transparent;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .dropdown-content a:hover {
+            background: var(--light-gray);
+        }
+
+        .cta-button {
+            background: var(--secondary-orange);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(4, 147, 68, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            margin-top: 80px;
+            padding: 80px 2rem 60px;
+            background: url('assets/banner-contato.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/banner-contato.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px);
+            z-index: -2;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .page-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            padding: 0 2rem 100px;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* CONTACT FORM */
+        .contact-form-wrapper {
+            background: white;
+            padding: 3.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
+            animation: fadeInUp 0.6s ease;
+            margin-bottom: 80px;
+        }
+
+        .form-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            color: var(--primary-blue);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #6b7280;
+            font-size: 1.05rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--dark-gray);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-orange);
+            box-shadow: 0 0 0 3px rgba(4, 147, 68, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, var(--secondary-orange), #059669);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(4, 147, 68, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* SUCCESS MESSAGE */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, var(--success-green), #34d399);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* CONTACT INFO - ESTILO MINIMALISTA */
+        .contact-info-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 80px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 60px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .info-item-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .info-item h3 {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item p {
+            color: #4b5563;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .info-item a {
+            color: var(--secondary-orange);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .info-item a:hover {
+            color: var(--secondary-orange);
+            text-decoration: underline;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+            margin: 60px 0;
+        }
+
+        /* MAP SECTION */
+        .map-section {
+            animation: fadeInUp 1s ease;
+        }
+
+        .map-section h3 {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .map-container {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #e5e7eb;
+            margin: 0 auto;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 1.1rem;
+            gap: 1rem;
+        }
+
+        .map-placeholder-icon {
+            font-size: 3rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark-gray);
+            color: var(--light-gray);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-orange);
+        }
+
+        .footer-middle {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .partners h3, .social h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .partner-logos {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .partner-logo-img, .government-logo-img {
+            height: 100px;
+            max-width: 200px;
+            object-fit: contain;
+        }
+
+        .government-supporters {
+            margin: 2rem 0 1rem 0;
+            font-weight: normal;
+            color: var(--light-gray);
+            font-size: 1rem;
+        }
+
+        .government-logos {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 3rem 0 1rem;
+        }
+
+        .inspiration {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--accent-yellow);
+            font-weight: 300;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                background: var(--light-gray);
+                margin: 0.5rem 0;
+                border-radius: 8px;
+                max-height: none;
+                overflow: visible;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .dropdown > a {
+                cursor: pointer;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .page-hero p {
+                font-size: 1.1rem;
+            }
+
+            .contact-form-wrapper {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .map-container {
+                height: 300px;
+            }
+
+            .footer-middle {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="assets/logo.png" alt="Instituto Arte de Saltar" style="height: 60px;"></a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#">Institucional ▾</a>
+                    <div class="dropdown-content">
+                        <a href="palavra-presidente.html">Palavra do Presidente</a>
+                        <a href="missao-visao-valores.html">Missão, Visão e Valores</a>
+                        <a href="historia-instituto.html">História do Instituto</a>
+                        <a href="historia-fundador.html">História do Fundador</a>
+                        <a href="nucleos-instituto.html">Núcleos do Instituto</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Quem Somos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="atuacao.html">Áreas de Atuação</a>
+                        <a href="esporte.html">Esporte</a>
+                        <a href="educacao.html">Educação</a>
+                        <a href="cultura.html">Cultura</a>
+                        <a href="tecnologia.html">Tecnologia</a>
+                        <a href="saude-cidadania.html">Saúde e Cidadania</a>
+                        <a href="projetos.html">Projetos</a>
+                        <a href="arte-saltar.html">Arte de Saltar</a>
+                        <a href="centro-ramirez-pala.html">Centro Ramirez Pala</a>
+                        <a href="formacao-capacitacao.html">Formação e Capacitação</a>
+                        <a href="eventos-festivais.html">Eventos e Festivais</a>
+                        <a href="projetos-culturais.html">Projetos culturais e interdisciplinares</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Modalidades ▾</a>
+                    <div class="dropdown-content">
+                        <a href="ginastica-artistica.html">Ginástica Artística</a>
+                        <a href="ginastica-trampolim.html">Ginástica de Trampolim</a>
+                        <a href="outras-modalidades.html">Outras Modalidades Esportivas</a>
+                        <a href="cultura-arte-ct.html">Cultura e Arte no CT</a>
+                        <a href="danca.html">Dança</a>
+                        <a href="musica.html">Música</a>
+                        <a href="teatro.html">Teatro</a>
+                        <a href="oficinas-culturais.html">Oficinas culturais</a>
+                        <a href="shows-eventos.html">Shows e eventos</a>
+                        <a href="acoes-comunitarias.html">Ações comunitárias</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Eventos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="calendario-acoes.html">Calendário de Ações Sociais</a>
+                        <a href="participacoes-competicoes.html">Participações e Competições</a>
+                        <a href="resultados-conquistas.html">Resultados e Conquistas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="transparencia.html">Transparência ▾</a>
+                    <div class="dropdown-content">
+                        <a href="documentos-gestao.html">Documentos e Gestão</a>
+                        <a href="estrutura-organizacional.html">Estrutura Organizacional</a>
+                        <a href="planejamento-gestao.html">Planejamento e Gestão</a>
+                        <a href="editais-compras.html">Editais e Compras</a>
+                        <a href="eleicoes.html">Eleições</a>
+                        <a href="assembleias.html">Assembleias</a>
+                        <a href="cnaes-registrados.html">CNAEs Registrados</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Marketing ▾</a>
+                    <div class="dropdown-content">
+                        <a href="noticias-comunicados.html">Notícias e Comunicados</a>
+                        <a href="patrocinadores.html">Patrocinadores</a>
+                        <a href="engajamento-social.html">Engajamento Social</a>
+                        <a href="galeria.html">Galeria de Fotos e Vídeos</a>
+                        <a href="imprensa.html">Imprensa / Releases</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Relacionamento ▾</a>
+                    <div class="dropdown-content">
+                        <a href="contato.html">Fale Conosco</a>
+                        <a href="ouvidoria.html">Ouvidoria</a>
+                        <a href="quero-participar.html">Quero Participar do Projeto</a>
+                    </div>
+                </li>
+                <li><a href="parceiro.html" class="cta-button">Seja Parceiro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Vamos Transformar Juntos</h1>
+            <p>Quer transformar sua comunidade com esporte, educação e cultura? Fale conoscos.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-form-wrapper">
+                <div class="form-header">
+                    <h2>Quero ser parceiro</h2>
+                    <p>Preencha o formulário abaixo e nossa equipe entrará em contato em breve.</p>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    ✓ Mensagem enviada com sucesso! Entraremos em contato em breve.
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo *</label>
+                            <input type="text" id="nome" name="nome" required placeholder="Seu nome">
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Empresa/Organização</label>
+                            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone *</label>
+                            <input type="tel" id="telefone" name="telefone" required placeholder="(00) 00000-0000">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interesse">Interesse *</label>
+                        <select id="interesse" name="interesse" required>
+                            <option value="">Selecione uma opção</option>
+                            <option value="parceria">Quero ser parceiro</option>
+                            <option value="patrocinio">Patrocínio/Investimento</option>
+                            <option value="voluntario">Trabalho voluntário</option>
+                            <option value="projeto">Propor um projeto</option>
+                            <option value="outro">Outro assunto</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem *</label>
+                        <textarea id="mensagem" name="mensagem" required placeholder="Conte-nos como podemos ajudar ou como gostaria de contribuir..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT INFO -->
+    <section class="contact-info-section">
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-item-icon">📍</span>
+                <h3>Endereço</h3>
+                <p>Estrada Santa Maria, nº 469<br>Rio de Janeiro - RJ</p>
+            </div>
+
+            <div class="info-item">
+                <span class="info-item-icon">📞</span>
+                <h3>Telefone</h3>
+                <p><a href="tel:+5521998576781">(21) 99857-6781</a></p>
+            </div>
+
+            <div class="info-item">
+                <span class="info-item-icon">📧</span>
+                <h3>E-mail</h3>
+                <p><a href="mailto:contato@institutoaartedesaltar.com">contato@institutoaartedesaltar.com</a></p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="map-section">
+            <h3>Nossa Localização</h3>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.588524668571!2d-43.5840175249749!3d-22.891653779265717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9be392eeccd387%3A0xa22d7c686e1b8c5!2sEstr.%20Santa%20Maria%2C%20469%20-%20Campo%20Grande%2C%20Rio%20de%20Janeiro%20-%20RJ%2C%2023071-160!5e0!3m2!1spt-BR!2sbr!4v1763241953454!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="index.html">Início</a> | 
+                <a href="projetos.html">Projetos</a> | 
+                <a href="index.html#transparencia">Transparência</a> | 
+                <a href="contato.html">Contato</a>
+            </div>
+            
+            <div class="footer-middle">
+                <div class="partners">
+                    <h3>Nossos Parceiros</h3>
+                    <div class="partner-logos">
+                        <img src="assets/ct-logo.png" alt="CT Logo" class="partner-logo-img">
+                        <img src="assets/cbc-logo.png" alt="CBC Logo" class="partner-logo-img">
+                    </div>
+                    <p class="government-supporters">APOIADORES GOVERNAMENTAIS</p>
+                    <div class="government-logos">
+                        <img src="assets/lei-incentivo.png" alt="Lei de Incentivo" class="government-logo-img">
+                        <img src="assets/ministerio-esporte.png" alt="Ministério do Esporte" class="government-logo-img">
+                    </div>
+                </div>
+                <div class="social">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/institutoaartedesaltar/" target="_blank" class="social-icon">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?phone=5521999591699&text=Ol%C3%A1%2C+desejo+entrar+em+contato+com+o+Instituto+A+Arte+de+Saltar%21" target="_blank" class="social-icon">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="inspiration">"Alguns assistem à transformação. Outros fazem parte dela."</p>
+                <p class="copyright">© 2025 Instituto Arte de Saltar. Todos os direitos reservados. </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Mobile dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                        
+                        // Close other dropdowns
+                        dropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (!nav.contains(e.target)) {
+                navLinks.classList.remove('active');
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            const form = document.getElementById('contactForm');
+            
+            successMessage.classList.add('show');
+            form.style.display = 'none';
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Reset form after 5 seconds
+            setTimeout(() => {
+                form.reset();
+                form.style.display = 'flex';
+                successMessage.classList.remove('show');
+            }, 5000);
+        });
+
+        // Phone mask
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d)/, '($1) $2');
+                value = value.replace(/(\d{5})(\d)/, '$1-$2');
+            }
+            e.target.value = value;
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.contact-form-wrapper, .info-grid, .map-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

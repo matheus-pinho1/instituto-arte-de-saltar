@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esporte - Instituto Arte de Saltar</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1f2937;
+            --secondary-orange: #049344;
+            --accent-yellow: #fbbf24;
+            --dark-gray: #1f2937;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+            --success-green: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            max-width: 300px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 1rem 0;
+            margin-top: 0;
+            animation: fadeIn 0.3s ease;
+            z-index: 1001;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: transparent;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .dropdown-content a:hover {
+            background: var(--light-gray);
+        }
+
+        .cta-button {
+            background: var(--secondary-orange);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(4, 147, 68, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+
+        /* MAIN CONTENT */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            margin-top: 80px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--secondary-orange);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark-gray);
+            color: var(--light-gray);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-orange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 3rem 0 1rem;
+        }
+
+        .inspiration {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--accent-yellow);
+            font-weight: 300;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                background: var(--light-gray);
+                margin: 0.5rem 0;
+                border-radius: 8px;
+                max-height: none;
+                overflow: visible;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .dropdown > a {
+                cursor: pointer;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="assets/logo.png" alt="Instituto Arte de Saltar" style="height: 60px;"></a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#">Institucional ▾</a>
+                    <div class="dropdown-content">
+                        <a href="palavra-presidente.html">Palavra do Presidente</a>
+                        <a href="missao-visao-valores.html">Missão, Visão e Valores</a>
+                        <a href="historia-instituto.html">História do Instituto</a>
+                        <a href="historia-fundador.html">História do Fundador</a>
+                        <a href="nucleos-instituto.html">Núcleos do Instituto</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Quem Somos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="atuacao.html">Áreas de Atuação</a>
+                        <a href="esporte.html">Esporte</a>
+                        <a href="educacao.html">Educação</a>
+                        <a href="cultura.html">Cultura</a>
+                        <a href="tecnologia.html">Tecnologia</a>
+                        <a href="saude-cidadania.html">Saúde e Cidadania</a>
+                        <a href="projetos.html">Projetos</a>
+                        <a href="arte-saltar.html">Arte de Saltar</a>
+                        <a href="centro-ramirez-pala.html">Centro Ramirez Pala</a>
+                        <a href="formacao-capacitacao.html">Formação e Capacitação</a>
+                        <a href="eventos-festivais.html">Eventos e Festivais</a>
+                        <a href="projetos-culturais.html">Projetos culturais e interdisciplinares</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Modalidades ▾</a>
+                    <div class="dropdown-content">
+                        <a href="ginastica-artistica.html">Ginástica Artística</a>
+                        <a href="ginastica-trampolim.html">Ginástica de Trampolim</a>
+                        <a href="outras-modalidades.html">Outras Modalidades Esportivas</a>
+                        <a href="cultura-arte-ct.html">Cultura e Arte no CT</a>
+                        <a href="danca.html">Dança</a>
+                        <a href="musica.html">Música</a>
+                        <a href="teatro.html">Teatro</a>
+                        <a href="oficinas-culturais.html">Oficinas culturais</a>
+                        <a href="shows-eventos.html">Shows e eventos</a>
+                        <a href="acoes-comunitarias.html">Ações comunitárias</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Eventos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="calendario-acoes.html">Calendário de Ações Sociais</a>
+                        <a href="participacoes-competicoes.html">Participações e Competições</a>
+                        <a href="resultados-conquistas.html">Resultados e Conquistas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="transparencia.html">Transparência ▾</a>
+                    <div class="dropdown-content">
+                        <a href="documentos-gestao.html">Documentos</a>
+                        <a href="estrutura-organizacional.html">Estrutura Organizacional</a>
+                        <a href="planejamento-gestao.html">Planejamento e Gestão</a>
+                        <a href="editais-compras.html">Editais e Compras</a>
+                        <a href="eleicoes.html">Eleições</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Marketing ▾</a>
+                    <div class="dropdown-content">
+                        <a href="noticias-comunicados.html">Notícias e Comunicados</a>
+                        <a href="patrocinadores.html">Patrocinadores</a>
+                        <a href="engajamento-social.html">Engajamento Social</a>
+                        <a href="galeria.html">Galeria de Fotos e Vídeos</a>
+                        <a href="imprensa.html">Imprensa / Releases</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Relacionamento ▾</a>
+                    <div class="dropdown-content">
+                        <a href="contato.html">Fale Conosco</a>
+                        <a href="ouvidoria.html">Ouvidoria</a>
+                        <a href="quero-participar.html">Quero Participar do Projeto</a>
+                    </div>
+                </li>
+                <li><a href="parceiro.html" class="cta-button">Seja Parceiro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Voltar ao Início</a>
+        <h1>Esporte</h1>
+        <p>Esta página está em desenvolvimento. Em breve você encontrará aqui informações detalhadas sobre nossas atividades esportivas.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="index.html">Início</a> | 
+                <a href="projetos.html">Projetos</a> | 
+                <a href="transparencia.html">Transparência</a> | 
+                <a href="contato.html">Contato</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="inspiration">"Alguns assistem à transformação. Outros fazem parte dela."</p>
+                <p class="copyright">© 2025 Instituto Arte de Saltar. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Mobile dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                        
+                        // Close other dropdowns
+                        dropdowns.forEach(otherDropdown => {
+                            if (otherDropdown !== dropdown) {
+                                otherDropdown.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (!nav.contains(e.target)) {
+                navLinks.classList.remove('active');
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
